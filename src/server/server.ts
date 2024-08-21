@@ -64,6 +64,8 @@ export const appRouter = router({
   covidCasesEngland: publicProcedure.query(async () => {
     const queryParams = new URLSearchParams({
       ...getLastWeekQueryParams(),
+      sex: "all",
+      age: "all",
     });
 
     const { success, data } = UKHSADataSchema.safeParse(
@@ -83,6 +85,8 @@ export const appRouter = router({
   covidCasesNorthWest: publicProcedure.query(async () => {
     const queryParams = new URLSearchParams({
       ...getLastWeekQueryParams(),
+      sex: "all",
+      age: "all",
     });
 
     const { success, data } = UKHSADataSchema.safeParse(
