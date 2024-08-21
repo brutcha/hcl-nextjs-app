@@ -1,10 +1,8 @@
 "use client";
-import Space from "antd/lib/space";
-import Spin from "antd/lib/spin";
-import Divider from "antd/lib/divider";
 import { client } from "@/client/client";
-import { BarChart } from "@/components/graph/BarChart";
+import { BarChart } from "@/components/chart/BarChart";
 import { UKHSADataPoint } from "@/server/server";
+import { ChartCard } from "@/components/chart/ChartCard";
 
 export default function Home() {
   const { data: casesEngland, isLoading: isEnglandLoading } =
@@ -14,38 +12,33 @@ export default function Home() {
 
   return (
     <main>
-      <Space
-        direction="horizontal"
-        style={{
-          alignItems: "stretch",
-        }}
+      <ChartCard
+        title="COVID-19 Last week new cases in England"
+        loading={isEnglandLoading}
       >
-        {isEnglandLoading ? (
-          <Spin />
-        ) : (
-          <BarChart<UKHSADataPoint>
-            data={casesEngland!}
-            xField="date"
-            xLabel="Date"
-            yField="metric_value"
-            yLabel="Cases"
-          />
-        )}
+        <BarChart<UKHSADataPoint>
+          data={casesEngland!}
+          xField="date"
+          xLabel="Date"
+          yField="metric_value"
+          yLabel="Cases"
+        />
+      </ChartCard>
 
-        <Divider type="vertical" style={{ height: "100%" }} />
+      <br />
 
-        {isNorthWestLoading ? (
-          <Spin />
-        ) : (
-          <BarChart<UKHSADataPoint>
-            data={casesNorthWest!}
-            xField="date"
-            xLabel="Date"
-            yField="metric_value"
-            yLabel="Cases"
-          />
-        )}
-      </Space>
+      <ChartCard
+        title="COVID-19 Last week new cases in North West England"
+        loading={isNorthWestLoading}
+      >
+        <BarChart<UKHSADataPoint>
+          data={casesNorthWest!}
+          xField="date"
+          xLabel="Date"
+          yField="metric_value"
+          yLabel="Cases"
+        />
+      </ChartCard>
     </main>
   );
 }

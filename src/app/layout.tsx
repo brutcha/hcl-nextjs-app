@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import ConfigProvider from "antd/lib/config-provider";
 import App from "antd/lib/app";
-import { Layout } from "@/components/layout/Layout";
+import { MainLayout } from "@/components/layout/MainLayout";
 import { ClientProvider } from "@/client/ClientProvider";
 import { theme } from "@/theme/theme";
 import "./globals.css";
@@ -24,7 +24,7 @@ export default function RootLayout({
           <ConfigProvider theme={theme}>
             <ClientProvider>
               <App>
-                <Layout title="App title">{children}</Layout>
+                <MainLayout title="App title">{children}</MainLayout>
               </App>
             </ClientProvider>
           </ConfigProvider>

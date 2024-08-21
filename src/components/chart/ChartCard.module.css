@@ -1,0 +1,40 @@
+.card {
+    min-width: 320px;
+    width: 100%;
+}
+
+.card.card.card .cardHeader, .card.card.card .cardBody {
+    padding: var(--ant-padding-content-vertical-sm) var(--ant-padding-content-horizontal-sm);
+}
+
+.card.card.card .cardActions {
+    padding: 0 var(--ant-padding-content-horizontal-sm);
+}
+
+.cardAction {
+    cursor: default;
+}
+
+.icon {
+    font-size: 24px;
+}
+
+@media screen and (min-width: 768px) {
+    .card.card.card .cardHeader, .card.card.card .cardBody, .card.card.card .cardActions {
+        padding: var(--ant-padding-content-vertical) var(--ant-padding-content-horizontal);
+    }
+
+    .card.card.card .cardActions {
+        padding: 0 var(--ant-padding-content-horizontal);
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .card.card.card .cardHeader, .card.card.card .cardBody, .card.card.card .cardActions {
+        padding: var(--ant-padding-content-vertical-lg) var(--ant-padding-content-horizontal-lg);
+    }
+
+    .card.card.card .cardActions {
+        padding: 0 var(--ant-padding-content-horizontal-lg);
+    }
+}
