@@ -3,6 +3,8 @@ import Space from "antd/lib/space";
 import Spin from "antd/lib/spin";
 import Divider from "antd/lib/divider";
 import { client } from "@/client/client";
+import { BarChart } from "@/components/graph/BarChart";
+import { UKHSADataPoint } from "@/server/server";
 
 export default function Home() {
   const { data: casesEngland, isLoading: isEnglandLoading } =
@@ -21,7 +23,13 @@ export default function Home() {
         {isEnglandLoading ? (
           <Spin />
         ) : (
-          <pre>{JSON.stringify(casesEngland, null, 2)}</pre>
+          <BarChart<UKHSADataPoint>
+            data={casesEngland!}
+            xField="date"
+            xLabel="Date"
+            yField="metric_value"
+            yLabel="Cases"
+          />
         )}
 
         <Divider type="vertical" style={{ height: "100%" }} />
@@ -29,7 +37,13 @@ export default function Home() {
         {isNorthWestLoading ? (
           <Spin />
         ) : (
-          <pre>{JSON.stringify(casesNorthWest, null, 2)}</pre>
+          <BarChart<UKHSADataPoint>
+            data={casesNorthWest!}
+            xField="date"
+            xLabel="Date"
+            yField="metric_value"
+            yLabel="Cases"
+          />
         )}
       </Space>
     </main>

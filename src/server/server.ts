@@ -28,7 +28,7 @@ const getLastWeekQueryParams = () => {
   };
 };
 
-const DataPointSchema = z
+const UKHSADataPointSchema = z
   .object({
     theme: z.string(),
     sub_theme: z.string(),
@@ -50,59 +50,65 @@ const DataPointSchema = z
   })
   .required();
 
+export type UKHSADataPoint = z.infer<typeof UKHSADataPointSchema>;
+
 const UKHSADataSchema = z.object({
   count: z.number(),
   prev: z.string().nullable().optional(),
   next: z.string().nullable().optional(),
-  results: z.array(DataPointSchema),
+  results: z.array(UKHSADataPointSchema),
 });
 
 export const appRouter = router({
   healthcheck: publicProcedure.query(async () => {
     return "alive";
   }),
-  covidCasesEngland: publicProcedure.query(async () => {
-    const queryParams = new URLSearchParams({
-      ...getLastWeekQueryParams(),
-      sex: "all",
-      age: "all",
-    });
+  covidCasesEngland: publicProcedure.query(
+    async (): Promise<UKHSADataPoint[]> => {
+      const queryParams = new URLSearchParams({
+        ...getLastWeekQueryParams(),
+        sex: "all",
+        age: "all",
+      });
 
-    const { success, data } = UKHSADataSchema.safeParse(
-      await (
-        await fetch(
-          `${UKHSA_BASE_URL}/${COVID_URL}/${ENGLAND_URL}/${COVID_CASES}?${queryParams}`,
-        )
-      ).json(),
-    );
+      const { success, data } = UKHSADataSchema.safeParse(
+        await (
+          await fetch(
+            `${UKHSA_BASE_URL}/${COVID_URL}/${ENGLAND_URL}/${COVID_CASES}?${queryParams}`,
+          )
+        ).json(),
+      );
 
-    if (!success) {
-      throw new Error("Failed to parse UKHSA data");
-    }
+      if (!success) {
+        throw new Error("Failed to parse UKHSA data");
+      }
 
-    return data?.results;
-  }),
-  covidCasesNorthWest: publicProcedure.query(async () => {
-    const queryParams = new URLSearchParams({
-      ...getLastWeekQueryParams(),
-      sex: "all",
-      age: "all",
-    });
+      return data?.results;
+    },
+  ),
+  covidCasesNorthWest: publicProcedure.query(
+    async (): Promise<UKHSADataPoint[]> => {
+      const queryParams = new URLSearchParams({
+        ...getLastWeekQueryParams(),
+        sex: "all",
+        age: "all",
+      });
 
-    const { success, data } = UKHSADataSchema.safeParse(
-      await (
-        await fetch(
-          `${UKHSA_BASE_URL}/${COVID_URL}/${NORTH_WEST_URL}/${COVID_CASES}?${queryParams}`,
-        )
-      ).json(),
-    );
+      const { success, data } = UKHSADataSchema.safeParse(
+        await (
+          await fetch(
+            `${UKHSA_BASE_URL}/${COVID_URL}/${NORTH_WEST_URL}/${COVID_CASES}?${queryParams}`,
+          )
+        ).json(),
+      );
 
-    if (!success) {
-      throw new Error("Failed to parse UKHSA data");
-    }
+      if (!success) {
+        throw new Error("Failed to parse UKHSA data");
+      }
 
-    return data?.results;
-  }),
+      return data?.results;
+    },
+  ),
 });
 
 export type AppRouter = typeof appRouter;
