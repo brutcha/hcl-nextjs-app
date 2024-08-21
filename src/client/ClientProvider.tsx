@@ -8,7 +8,7 @@ import { queryClient } from "./queryClient";
 const trpcClient = client.createClient({
   links: [
     httpBatchLink({
-      url: "http://localhost:3000/api",
+      url: "/api",
     }),
   ],
 });
