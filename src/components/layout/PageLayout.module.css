@@ -1,0 +1,43 @@
+.header {
+    gap: var(--ant-margin-xs);
+    margin: var(--ant-margin-xs);
+}
+
+.header.header.header {
+    flex-direction: column;
+    align-content: start;
+}
+
+@media screen and (min-width: 320px) {
+    .header {
+        margin: var(--ant-margin-xs) 0;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .header {
+        margin: var(--ant-margin-sm) 0;
+    }
+
+    .title.title.title {
+        --ant-typography-title-margin-bottom: 0px;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .header {
+        margin: var(--ant-margin) 0;
+    }
+
+
+    .header.header.header {
+        flex-direction: row;
+        align-content: center;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .header {
+        margin: var(--ant-margin-md) 0;
+    }
+}
