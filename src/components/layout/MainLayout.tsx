@@ -11,7 +11,7 @@ export const MainLayout: FC<LayoutProps> = async ({ children, title }) => {
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
-        <Title>{title}</Title>
+        <Title level={4}>{title}</Title>
       </Header>
       <Content className={styles.content}>{children}</Content>
     </Layout>

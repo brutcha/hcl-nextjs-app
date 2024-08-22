@@ -19,6 +19,7 @@
 }
 
 .content {
+    width: 100%;
     max-width: 320px;
     padding: var(--ant-padding-content-vertical-sm) 0;
     margin: 0 auto;

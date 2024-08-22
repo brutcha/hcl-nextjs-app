@@ -23,7 +23,7 @@ export const BarChart = <d extends Record<string, unknown>>({
   const renderBarChart = useCallback(
     (container: HTMLDivElement) => {
       if (chart.current === null) {
-        chart.current = new Chart({ container });
+        chart.current = new Chart({ container, autoFit: true, height: 400 });
       }
 
       chart.current

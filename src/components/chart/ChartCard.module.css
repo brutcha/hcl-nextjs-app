@@ -7,6 +7,10 @@
     padding: var(--ant-padding-content-vertical-sm) var(--ant-padding-content-horizontal-sm);
 }
 
+.card.card.card .cardBody {
+    overflow-x: hidden;
+}
+
 .card.card.card .cardActions {
     padding: 0 var(--ant-padding-content-horizontal-sm);
 }
